@@ -1,0 +1,2131 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0907">
+
+<title>Tiwari Dhaba & Restaurant</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#080705;
+    color:#f4ede2;
+    font-family:"DM Sans",sans-serif;
+    overflow-x:hidden;
+}
+
+body.locked{
+    overflow:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font:inherit;
+}
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+    --bg:#080705;
+    --bg2:#100d09;
+    --card:#15110c;
+    --gold:#c99a4a;
+    --gold-light:#f1d18c;
+    --cream:#f5eee2;
+    --muted:#a59a8b;
+    --line:rgba(241,209,140,.18);
+}
+
+/* =========================================================
+   INTRO SCREEN
+========================================================= */
+
+.intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(circle at 50% 40%,rgba(201,154,74,.08),transparent 35%),
+        #080705;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease,
+        transform 1s ease;
+}
+
+.intro.hide{
+    opacity:0;
+    visibility:hidden;
+    transform:scale(1.04);
+    pointer-events:none;
+}
+
+.intro-content{
+    width:min(700px,90%);
+    text-align:center;
+    position:relative;
+}
+
+/* tiny top line */
+
+.eyebrow{
+    color:var(--gold-light);
+    font-size:10px;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+}
+
+.intro-title{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(45px,8vw,82px);
+    line-height:.85;
+    font-weight:500;
+    letter-spacing:-2px;
+}
+
+.intro-title span{
+    display:block;
+    color:var(--gold-light);
+    font-size:.65em;
+    margin-top:13px;
+    letter-spacing:5px;
+}
+
+/* =========================================================
+   ROPE
+========================================================= */
+
+.rope-area{
+    position:relative;
+    width:220px;
+    height:440px;
+    margin:5px auto 0;
+    cursor:grab;
+    user-select:none;
+    touch-action:none;
+}
+
+.rope-area:active{
+    cursor:grabbing;
+}
+
+/* ceiling rope */
+
+.rope{
+    position:absolute;
+    left:50%;
+    top:0;
+
+    width:8px;
+    height:330px;
+
+    transform:translateX(-50%);
+
+    background:
+        repeating-linear-gradient(
+            35deg,
+            #8c6235 0px,
+            #c08c50 3px,
+            #6e4928 6px,
+            #b77e42 9px
+        );
+
+    border-radius:10px;
+
+    box-shadow:
+        inset 2px 0 2px rgba(255,255,255,.15),
+        3px 4px 8px rgba(0,0,0,.5);
+
+    transform-origin:top center;
+}
+
+/* rope fibres */
+
+.rope:before,
+.rope:after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    border-radius:10px;
+    opacity:.3;
+}
+
+.rope:before{
+    border-left:2px solid #f0c77e;
+}
+
+.rope:after{
+    border-right:2px solid #402816;
+}
+
+/* handle */
+
+.rope-handle{
+    position:absolute;
+    left:50%;
+    top:305px;
+
+    width:82px;
+    height:92px;
+
+    transform:translateX(-50%);
+
+    border-radius:50% 50% 44% 44%;
+
+    background:
+        radial-gradient(
+            circle at 35% 28%,
+            #d8a968,
+            #95622f 48%,
+            #593719 100%
+        );
+
+    border:4px solid #6b4423;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.55),
+        inset 4px 4px 10px rgba(255,255,255,.13);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#211408;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.rope-handle:after{
+    content:"";
+    position:absolute;
+    bottom:-15px;
+    width:38px;
+    height:14px;
+    border-radius:0 0 50% 50%;
+    background:#6c4726;
+}
+
+/* pull text */
+
+.pull-text{
+    position:absolute;
+    top:405px;
+    left:0;
+    width:100%;
+
+    color:#bca98d;
+    font-size:10px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+
+    animation:
+        pulseText 2s ease-in-out infinite;
+}
+
+@keyframes pulseText{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+/* decorative corners */
+
+.corner{
+    position:absolute;
+    width:55px;
+    height:55px;
+    opacity:.55;
+}
+
+.corner.tl{
+    top:35px;
+    left:35px;
+    border-top:1px solid var(--gold);
+    border-left:1px solid var(--gold);
+}
+
+.corner.tr{
+    top:35px;
+    right:35px;
+    border-top:1px solid var(--gold);
+    border-right:1px solid var(--gold);
+}
+
+.corner.bl{
+    bottom:35px;
+    left:35px;
+    border-bottom:1px solid var(--gold);
+    border-left:1px solid var(--gold);
+}
+
+.corner.br{
+    bottom:35px;
+    right:35px;
+    border-bottom:1px solid var(--gold);
+    border-right:1px solid var(--gold);
+}
+
+/* =========================================================
+   MAIN WEBSITE
+========================================================= */
+
+#website{
+    opacity:0;
+    transform:translateY(35px);
+    transition:
+        opacity 1.2s ease .3s,
+        transform 1.2s ease .3s;
+}
+
+#website.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+
+    z-index:100;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:19px 5%;
+
+    background:rgba(8,7,5,.72);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.brand{
+    font-family:"Cormorant Garamond",serif;
+    font-size:28px;
+    font-weight:600;
+}
+
+.brand small{
+    display:block;
+    color:var(--gold-light);
+    font-family:"DM Sans",sans-serif;
+    font-size:8px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    font-size:12px;
+    color:#c9c0b4;
+}
+
+.nav-links a{
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--gold-light);
+}
+
+.nav-call{
+    border:1px solid var(--gold);
+    padding:10px 17px;
+    border-radius:30px;
+    color:var(--gold-light);
+    font-size:11px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,4,3,.94) 0%,
+            rgba(5,4,3,.68) 48%,
+            rgba(5,4,3,.25) 100%
+        ),
+        url("https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl6Z2wkovC9iQ16Gn5sJKBI_DoEDwH_2-Ci_4D7GSyhhH0elevAL4nmjUw_4XT3k6L5yH7Aj4eOjtVYe7fWA7bhlsELebMuuEVeYW6QC1iSk_O0OCmIhPhJaIfuJYHyl0HmFq-20w=w645-h298-k-no");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 70% 50%,
+            transparent,
+            rgba(0,0,0,.48) 70%
+        );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:min(1180px,90%);
+    margin:auto;
+    padding-top:80px;
+}
+
+.hero-kicker{
+    color:var(--gold-light);
+    font-size:10px;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    margin-bottom:22px;
+}
+
+.hero h1{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(70px,11vw,145px);
+    line-height:.75;
+    letter-spacing:-6px;
+    font-weight:500;
+}
+
+.hero h1 span{
+    color:var(--gold-light);
+}
+
+.hero-sub{
+    margin-top:28px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:30px;
+    color:#eee3d2;
+}
+
+.hero-description{
+    margin-top:18px;
+    max-width:580px;
+    color:#bdb2a5;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.actions{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 22px;
+
+    border-radius:3px;
+    font-size:12px;
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.btn-gold{
+    background:var(--gold);
+    color:#171008;
+}
+
+.btn-gold:hover{
+    background:var(--gold-light);
+    transform:translateY(-3px);
+}
+
+.btn-line{
+    border:1px solid rgba(255,255,255,.3);
+}
+
+.btn-line:hover{
+    border-color:var(--gold);
+    color:var(--gold-light);
+}
+
+.hero-rating{
+    position:absolute;
+    z-index:4;
+
+    right:7%;
+    bottom:12%;
+
+    padding-left:25px;
+    border-left:1px solid var(--gold);
+
+    text-align:center;
+}
+
+.hero-rating strong{
+    display:block;
+    font-family:"Cormorant Garamond",serif;
+    font-size:65px;
+    color:var(--gold-light);
+    line-height:.8;
+}
+
+.stars{
+    color:var(--gold-light);
+    letter-spacing:3px;
+    margin-top:15px;
+}
+
+.hero-rating small{
+    display:block;
+    color:#9a9084;
+    font-size:9px;
+    letter-spacing:3px;
+    margin-top:6px;
+}
+
+/* =========================================================
+   COMMON
+========================================================= */
+
+section{
+    padding:110px 0;
+}
+
+.container{
+    width:min(1180px,90%);
+    margin:auto;
+}
+
+.label{
+    color:var(--gold);
+    font-size:10px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    margin-bottom:17px;
+}
+
+.section-title{
+    font-family:"Cormorant Garamond",serif;
+    font-size:65px;
+    line-height:.9;
+    font-weight:500;
+}
+
+.section-title span{
+    color:var(--gold-light);
+}
+
+.section-center{
+    max-width:700px;
+    text-align:center;
+    margin:0 auto 55px;
+}
+
+.section-center p{
+    color:var(--muted);
+    line-height:1.8;
+    margin-top:20px;
+}
+
+.gold-line{
+    width:65px;
+    height:1px;
+    background:var(--gold);
+    margin:27px 0;
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about{
+    background:var(--bg);
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    gap:75px;
+    align-items:center;
+}
+
+.about-image{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+
+    border:1px solid var(--line);
+
+    padding:8px;
+
+    background:#0d0a07;
+}
+
+.about-copy p{
+    color:var(--muted);
+    line-height:1.9;
+    font-size:14px;
+}
+
+.info-row{
+    display:flex;
+    gap:45px;
+    margin-top:32px;
+    flex-wrap:wrap;
+}
+
+.info-item strong{
+    display:block;
+    color:#e9dfd1;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.info-item span{
+    color:#81776c;
+    font-size:11px;
+}
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu{
+    background:
+        linear-gradient(rgba(16,13,9,.96),rgba(16,13,9,.96));
+}
+
+.menu-frame{
+    max-width:850px;
+    margin:auto;
+
+    padding:13px;
+
+    border:1px solid rgba(201,154,74,.35);
+
+    background:#090806;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.5);
+}
+
+.menu-frame img{
+    display:block;
+    width:100%;
+    max-height:900px;
+    object-fit:contain;
+    background:white;
+}
+
+.menu-note{
+    text-align:center;
+    color:#756c61;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-top:16px;
+}
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.features{
+    background:#0b0907;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.feature-card{
+    padding:28px;
+    min-height:150px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.01)
+        );
+
+    transition:.35s;
+}
+
+.feature-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(201,154,74,.4);
+}
+
+.feature-card .number{
+    color:var(--gold);
+    font-family:"Cormorant Garamond",serif;
+    font-size:24px;
+}
+
+.feature-card h3{
+    margin-top:8px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:25px;
+    font-weight:500;
+}
+
+.feature-card p{
+    color:#81786d;
+    font-size:12px;
+    line-height:1.7;
+    margin-top:7px;
+}
+
+/* =========================================================
+   EXPERIENCE
+========================================================= */
+
+.experience{
+    min-height:600px;
+
+    display:flex;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            rgba(8,6,4,.87),
+            rgba(8,6,4,.9)
+        ),
+        url("https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlAPx1FvOOtSyoqP31e8f-6R_gpO3paji5oY02XQPca5VmvaHv6Qv2wuHTECfq95bfq6v-uSLhWjbIFB5liPqP4LKApwY--BFuSsRSf_NkP_1ATuyytyQaBKlXjw3RGVr49J4sp=w645-h298-k-no");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+.experience-box{
+    max-width:700px;
+}
+
+.experience-box p{
+    color:#a69b8e;
+    line-height:1.9;
+    margin-top:20px;
+}
+
+.tag-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.tag{
+    border:1px solid rgba(201,154,74,.35);
+    padding:13px 17px;
+    color:#d0b57f;
+    font-size:11px;
+}
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery{
+    background:var(--cream);
+    color:#1e1710;
+}
+
+.gallery .section-title{
+    color:#1e1710;
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    grid-template-rows:260px 260px;
+    gap:10px;
+}
+
+.gallery-item{
+    overflow:hidden;
+    position:relative;
+}
+
+.gallery-item:first-child{
+    grid-row:span 2;
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.07);
+}
+
+/* =========================================================
+   REVIEWS
+========================================================= */
+
+.reviews{
+    background:#080705;
+}
+
+.review-layout{
+    display:grid;
+    grid-template-columns:290px 1fr;
+    gap:70px;
+}
+
+.rating-card{
+    height:max-content;
+    padding:40px 25px;
+    text-align:center;
+
+    border:1px solid rgba(201,154,74,.35);
+
+    background:#0f0c08;
+}
+
+.rating-card strong{
+    display:block;
+    font-family:"Cormorant Garamond",serif;
+    color:var(--gold-light);
+    font-size:85px;
+    line-height:.8;
+}
+
+.rating-card .stars{
+    margin-top:18px;
+}
+
+.rating-card p{
+    color:#746c63;
+    font-size:11px;
+    margin-top:9px;
+}
+
+.review{
+    padding-bottom:28px;
+    margin-bottom:28px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.review:last-child{
+    border-bottom:0;
+}
+
+.review p{
+    font-family:"Cormorant Garamond",serif;
+    font-size:25px;
+    line-height:1.45;
+    color:#d4cabd;
+}
+
+.review strong{
+    display:block;
+    color:var(--gold-light);
+    font-size:11px;
+    margin-top:12px;
+}
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.details{
+    background:#110e0a;
+}
+
+.details-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.detail-box{
+    padding:30px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    background:rgba(255,255,255,.018);
+}
+
+.detail-box h3{
+    font-family:"Cormorant Garamond",serif;
+    font-size:28px;
+    color:#eee2d2;
+    margin-bottom:15px;
+}
+
+.detail-box ul{
+    list-style:none;
+}
+
+.detail-box li{
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    color:#968b7e;
+    font-size:12px;
+}
+
+.detail-box li:last-child{
+    border-bottom:0;
+}
+
+.detail-box li:before{
+    content:"?";
+    color:var(--gold);
+    margin-right:10px;
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact{
+    background:#080705;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.contact-card{
+    padding:35px;
+    border:1px solid rgba(255,255,255,.07);
+    background:#0e0b08;
+}
+
+.contact-card h3{
+    font-family:"Cormorant Garamond",serif;
+    font-size:32px;
+    font-weight:500;
+}
+
+.contact-card p{
+    color:#8f867b;
+    line-height:1.8;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.phone{
+    display:inline-block;
+    color:var(--gold-light);
+    font-family:"Cormorant Garamond",serif;
+    font-size:27px;
+    margin-top:13px;
+}
+
+.map{
+    width:100%;
+    height:380px;
+    border:0;
+    margin-top:15px;
+
+    filter:grayscale(1) contrast(1.1);
+}
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.final{
+    padding:120px 20px;
+    text-align:center;
+
+    background:
+        linear-gradient(
+            rgba(28,18,9,.88),
+            rgba(28,18,9,.92)
+        ),
+        url("https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl6Z2wkovC9iQ16Gn5sJKBI_DoEDwH_2-Ci_4D7GSyhhH0elevAL4nmjUw_4XT3k6L5yH7Aj4eOjtVYe7fWA7bhlsELebMuuEVeYW6QC1iSk_O0OCmIhPhJaIfuJYHyl0HmFq-20w=w645-h298-k-no");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.final h2{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(50px,8vw,90px);
+    line-height:.85;
+    font-weight:500;
+}
+
+.final h2 span{
+    color:var(--gold-light);
+}
+
+.final p{
+    color:#aaa092;
+    margin:20px 0 28px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:40px 20px;
+    text-align:center;
+    background:#050403;
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.footer-name{
+    font-family:"Cormorant Garamond",serif;
+    font-size:28px;
+}
+
+.footer-hindi{
+    color:var(--gold);
+    font-size:10px;
+    letter-spacing:3px;
+    margin-top:3px;
+}
+
+.copyright{
+    color:#59524a;
+    font-size:10px;
+    margin-top:16px;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero-rating{
+        display:none;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .about-image{
+        height:360px;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .review-layout{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .details-grid,
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:230px 230px 230px;
+    }
+
+    .gallery-item:first-child{
+        grid-row:span 2;
+    }
+}
+
+@media(max-width:550px){
+
+    section{
+        padding:75px 0;
+    }
+
+    .nav{
+        padding:14px 5%;
+    }
+
+    .brand{
+        font-size:22px;
+    }
+
+    .nav-call{
+        padding:8px 12px;
+        font-size:9px;
+    }
+
+    .intro-title{
+        font-size:48px;
+    }
+
+    .rope-area{
+        transform:scale(.82);
+        transform-origin:top center;
+        margin-bottom:-70px;
+    }
+
+    .hero h1{
+        font-size:70px;
+        letter-spacing:-3px;
+    }
+
+    .hero-sub{
+        font-size:25px;
+    }
+
+    .section-title{
+        font-size:50px;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr;
+        grid-template-rows:250px 220px 220px 220px;
+    }
+
+    .gallery-item:first-child{
+        grid-row:auto;
+    }
+
+    .review p{
+        font-size:21px;
+    }
+
+    .contact-card{
+        padding:25px;
+    }
+}
+
+/* =========================================================
+   PULL ANIMATION
+========================================================= */
+
+.rope-area.pulling .rope{
+    animation:ropePull .65s ease-in-out;
+}
+
+.rope-area.pulling .rope-handle{
+    animation:handlePull .65s ease-in-out;
+}
+
+@keyframes ropePull{
+    0%{transform:translateX(-50%) rotate(0deg)}
+    25%{transform:translateX(-50%) rotate(-5deg)}
+    50%{transform:translateX(-50%) rotate(5deg)}
+    75%{transform:translateX(-50%) rotate(-3deg)}
+    100%{transform:translateX(-50%) rotate(0deg)}
+}
+
+@keyframes handlePull{
+    0%{transform:translateX(-50%) translateY(0)}
+    40%{transform:translateX(-50%) translateY(28px)}
+    100%{transform:translateX(-50%) translateY(0)}
+}
+
+</style>
+</head>
+
+
+<body class="locked">
+
+<!-- ======================================================
+     INTRO / PULL ROPE
+====================================================== -->
+
+<div class="intro" id="intro">
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="intro-content">
+
+        <div class="eyebrow">
+            Tiwari Dhaba & Restaurant
+        </div>
+
+        <h1 class="intro-title">
+            Welcome
+            <span>?????? ???? ??? ??????????</span>
+        </h1>
+
+        <div class="rope-area" id="ropeArea">
+
+            <div class="rope" id="rope"></div>
+
+            <div class="rope-handle">
+                PULL
+            </div>
+
+            <div class="pull-text">
+                Pull Rope
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     WEBSITE
+====================================================== -->
+
+<div id="website">
+
+
+<!-- NAVIGATION -->
+
+<nav class="nav">
+
+    <a href="#home" class="brand">
+        Tiwari Dhaba
+        <small>Family Restaurant</small>
+    </a>
+
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#experience">Experience</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <a href="tel:09026936055" class="nav-call">
+        CALL NOW
+    </a>
+
+</nav>
+
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="hero-kicker">
+            Est. • Mangari • Uttar Pradesh
+        </div>
+
+        <h1>
+            Tiwari
+            <span>Dhaba.</span>
+        </h1>
+
+        <div class="hero-sub">
+            ?????? ???? ??? ??????????
+        </div>
+
+        <p class="hero-description">
+            Delicious food, home-like taste and warm family
+            service — a comfortable stop on the
+            Ayodhya–Prayagraj Road.
+        </p>
+
+        <div class="actions">
+
+            <a
+                href="tel:09026936055"
+                class="btn btn-gold">
+                ? &nbsp; Call Restaurant
+            </a>
+
+            <a
+                target="_blank"
+                href="https://www.google.com/maps/search/?api=1&query=G43J%2BQ5R%2C+Ayodhya+-+Prayagraj+Rd%2C+Mangari%2C+Uttar+Pradesh+224206"
+                class="btn btn-line">
+                ?? &nbsp; Get Directions
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-rating">
+
+        <strong>4.9</strong>
+
+        <div class="stars">
+            ?????
+        </div>
+
+        <small>
+            11 REVIEWS
+        </small>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ABOUT
+====================================================== -->
+
+<section class="about" id="about">
+
+    <div class="container">
+
+        <div class="about-grid">
+
+            <img
+                class="about-image"
+                src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlAPx1FvOOtSyoqP31e8f-6R_gpO3paji5oY02XQPca5VmvaHv6Qv2wuHTECfq95bfq6v-uSLhWjbIFB5liPqP4LKApwY--BFuSsRSf_NkP_1ATuyytyQaBKlXjw3RGVr49J4sp=w645-h298-k-no"
+                alt="Tiwari Dhaba Restaurant">
+
+            <div class="about-copy">
+
+                <div class="label">
+                    Our Story
+                </div>
+
+                <h2 class="section-title">
+                    Food that feels
+                    <span>like home.</span>
+                </h2>
+
+                <div class="gold-line"></div>
+
+                <p>
+                    Tiwari Dhaba and Restaurant is a family
+                    restaurant in Mangari, Uttar Pradesh,
+                    situated on the Ayodhya–Prayagraj Road.
+                </p>
+
+                <br>
+
+                <p>
+                    The restaurant is known for delicious,
+                    tasty and home-like food served with
+                    warmth by Mr. Tiwari and his family.
+                </p>
+
+                <div class="info-row">
+
+                    <div class="info-item">
+                        <strong>Rating</strong>
+                        <span>4.9 / 5</span>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>Reviews</strong>
+                        <span>11 Reviews</span>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>Dining</strong>
+                        <span>Family Restaurant</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     MENU
+====================================================== -->
+
+<section class="menu" id="menu">
+
+    <div class="container">
+
+        <div class="section-center">
+
+            <div class="label">
+                Explore
+            </div>
+
+            <h2 class="section-title">
+                Our <span>Menu</span>
+            </h2>
+
+            <p>
+                ????? restaurant ?? menu ???? ??????
+                Prices ?? ???????? ???? ????? ??? ?? ???????
+                latest prices available ???? ????
+            </p>
+
+        </div>
+
+        <div class="menu-frame">
+
+            <img
+                src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmU5Q4fpNQDP9qR_0_qb7-1klc4HbSM3tFQJByA3Bbkku6UCvfo0yLAikLAEmyd1yilangpbzSyHEsNugeM9HGOVU7ckABgXw4ZLJ56uUJPIBZSRcp-npBXD-FL9GPAt3ceuvtR=w112-h112-p-k-no"
+                alt="Tiwari Dhaba Menu">
+
+        </div>
+
+        <div class="menu-note">
+            MENU • TIWARI DHABA & RESTAURANT
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     FEATURES
+====================================================== -->
+
+<section class="features">
+
+    <div class="container">
+
+        <div class="section-center">
+
+            <div class="label">
+                Restaurant Details
+            </div>
+
+            <h2 class="section-title">
+                Made for every
+                <span>kind of visit.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <div class="number">01</div>
+                <h3>Service</h3>
+                <p>
+                    Drive-through · Takeaway · Dine-in
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="number">02</div>
+                <h3>Great Tea Selection</h3>
+                <p>
+                    A highlighted choice for tea lovers.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="number">03</div>
+                <h3>Popular For</h3>
+                <p>
+                    Lunch · Dinner · Solo dining
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="number">04</div>
+                <h3>Offerings</h3>
+                <p>
+                    All you can eat · Late-night food ·
+                    Quick bite · Small plates
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="number">05</div>
+                <h3>Dining</h3>
+                <p>
+                    Breakfast · Lunch · Dinner ·
+                    Table service
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="number">06</div>
+                <h3>Atmosphere</h3>
+                <p>
+                    Casual atmosphere · Good for groups
+                    and families
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="number">07</div>
+                <h3>Children</h3>
+                <p>
+                    Good for kids
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="number">08</div>
+                <h3>Parking</h3>
+                <p>
+                    Free parking lot · Free street parking
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="number">09</div>
+                <h3>Family Dining</h3>
+                <p>
+                    A welcoming place for family meals
+                    and groups.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     EXPERIENCE
+====================================================== -->
+
+<section class="experience" id="experience">
+
+    <div class="container">
+
+        <div class="experience-box">
+
+            <div class="label">
+                The Tiwari Experience
+            </div>
+
+            <h2 class="section-title">
+                Simple food.
+                <span>Real warmth.</span>
+            </h2>
+
+            <p>
+                Whether you're travelling along the
+                Ayodhya–Prayagraj Road or looking for
+                a comfortable family meal, Tiwari Dhaba
+                offers a casual dining experience with
+                dine-in, takeaway and drive-through options.
+            </p>
+
+            <div class="tag-row">
+
+                <div class="tag">DINE-IN</div>
+                <div class="tag">TAKEAWAY</div>
+                <div class="tag">DRIVE-THROUGH</div>
+                <div class="tag">FAMILY FRIENDLY</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     GALLERY
+====================================================== -->
+
+<section class="gallery" id="gallery">
+
+    <div class="container">
+
+        <div class="section-center">
+
+            <div class="label">
+                Visuals
+            </div>
+
+            <h2 class="section-title">
+                A glimpse of
+                <span>Tiwari.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl6Z2wkovC9iQ16Gn5sJKBI_DoEDwH_2-Ci_4D7GSyhhH0elevAL4nmjUw_4XT3k6L5yH7Aj4eOjtVYe7fWA7bhlsELebMuuEVeYW6QC1iSk_O0OCmIhPhJaIfuJYHyl0HmFq-20w=w645-h298-k-no"
+                    alt="Tiwari Dhaba">
+
+            </div>
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmU5Q4fpNQDP9qR_0_qb7-1klc4HbSM3tFQJByA3Bbkku6UCvfo0yLAikLAEmyd1yilangpbzSyHEsNugeM9HGOVU7ckABgXw4ZLJ56uUJPIBZSRcp-npBXD-FL9GPAt3ceuvtR=w112-h112-p-k-no"
+                    alt="Menu">
+
+            </div>
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlAPx1FvOOtSyoqP31e8f-6R_gpO3paji5oY02XQPca5VmvaHv6Qv2wuHTECfq95bfq6v-uSLhWjbIFB5liPqP4LKApwY--BFuSsRSf_NkP_1ATuyytyQaBKlXjw3RGVr49J4sp=w645-h298-k-no"
+                    alt="Restaurant">
+
+            </div>
+
+            <div class="gallery-item">
+
+                <img
+                    src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=0yl3aDH_hRKKKiOxib5Y8Q&cb_client=maps_sv.tactile.gps&w=224&h=298&yaw=298.68613&pitch=0&thumbfov=100"
+                    alt="Street View">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     REVIEWS
+====================================================== -->
+
+<section class="reviews" id="reviews">
+
+    <div class="container">
+
+        <div class="review-layout">
+
+            <div class="rating-card">
+
+                <strong>4.9</strong>
+
+                <div class="stars">
+                    ?????
+                </div>
+
+                <p>
+                    11 Google reviews
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <div class="label">
+                    What Guests Say
+                </div>
+
+
+                <div class="review">
+
+                    <p>
+                        “Superb Home like, tasty Delicious
+                        and Healthy Food available and is
+                        served with Love by Mr Tiwari and Family....”
+                    </p>
+
+                    <strong>
+                        — Mrinal Makarand
+                    </strong>
+
+                </div>
+
+
+                <div class="review">
+
+                    <p>
+                        “All dishes delicious... ????”
+                    </p>
+
+                    <strong>
+                        — aditya tiwari
+                    </strong>
+
+                </div>
+
+
+                <div class="review">
+
+                    <p>
+                        “The food is the best, the service
+                        is number one, you must also go,
+                        it is very good.”
+                    </p>
+
+                    <strong>
+                        — Shivadi Serials updates
+                    </strong>
+
+                </div>
+
+
+                <div class="review">
+
+                    <p>
+                        “Very good restaurant ????????”
+                    </p>
+
+                    <strong>
+                        — Shalvisha Tiwari
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     DETAILS
+====================================================== -->
+
+<section class="details">
+
+    <div class="container">
+
+        <div class="section-center">
+
+            <div class="label">
+                Good To Know
+            </div>
+
+            <h2 class="section-title">
+                Everything you
+                <span>need to know.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="details-grid">
+
+            <div class="detail-box">
+
+                <h3>Service Options</h3>
+
+                <ul>
+                    <li>Drive-through</li>
+                    <li>Takeaway</li>
+                    <li>Dine-in</li>
+                </ul>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <h3>Popular For</h3>
+
+                <ul>
+                    <li>Lunch</li>
+                    <li>Dinner</li>
+                    <li>Solo dining</li>
+                </ul>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <h3>Dining Options</h3>
+
+                <ul>
+                    <li>Breakfast</li>
+                    <li>Lunch</li>
+                    <li>Dinner</li>
+                    <li>Table service</li>
+                </ul>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <h3>Offerings</h3>
+
+                <ul>
+                    <li>All you can eat</li>
+                    <li>Late-night food</li>
+                    <li>Quick bite</li>
+                    <li>Small plates</li>
+                </ul>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <h3>Atmosphere & Crowd</h3>
+
+                <ul>
+                    <li>Casual atmosphere</li>
+                    <li>Good for groups</li>
+                    <li>Good for kids</li>
+                </ul>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <h3>Parking</h3>
+
+                <ul>
+                    <li>Free parking lot</li>
+                    <li>Free street parking</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     CONTACT
+====================================================== -->
+
+<section class="contact" id="contact">
+
+    <div class="container">
+
+        <div class="section-center">
+
+            <div class="label">
+                Come Visit
+            </div>
+
+            <h2 class="section-title">
+                Find <span>Us.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <div class="label">
+                    Address
+                </div>
+
+                <h3>
+                    Mangari, Uttar Pradesh
+                </h3>
+
+                <p>
+                    G43J+Q5R, Ayodhya - Prayagraj Rd,
+                    Mangari, Uttar Pradesh 224206
+                </p>
+
+                <a
+                    target="_blank"
+                    href="https://www.google.com/maps/search/?api=1&query=G43J%2BQ5R%2C+Ayodhya+-+Prayagraj+Rd%2C+Mangari%2C+Uttar+Pradesh+224206"
+                    class="btn btn-gold"
+                    style="margin-top:22px;">
+                    ?? Open Maps
+                </a>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div class="label">
+                    Contact
+                </div>
+
+                <h3>
+                    Let's Talk
+                </h3>
+
+                <p>
+                    For restaurant enquiries,
+                    call directly.
+                </p>
+
+                <a
+                    href="tel:09026936055"
+                    class="phone">
+                    090269 36055
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <iframe
+            class="map"
+            src="https://www.google.com/maps?q=G43J%2BQ5R%2C%20Ayodhya%20-%20Prayagraj%20Rd%2C%20Mangari%2C%20Uttar%20Pradesh%20224206&output=embed"
+            loading="lazy">
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     FINAL CTA
+====================================================== -->
+
+<section class="final">
+
+    <div class="label">
+        Tiwari Dhaba & Restaurant
+    </div>
+
+    <h2>
+        Come hungry.<br>
+        <span>Leave happy.</span>
+    </h2>
+
+    <p>
+        ?????? ???? ??? ??????????
+    </p>
+
+    <a
+        href="tel:09026936055"
+        class="btn btn-gold">
+        ? &nbsp; Call Restaurant
+    </a>
+
+    <a
+        target="_blank"
+        href="https://www.google.com/maps/search/?api=1&query=G43J%2BQ5R%2C+Ayodhya+-+Prayagraj+Rd%2C+Mangari%2C+Uttar+Pradesh+224206"
+        class="btn btn-line">
+        ?? &nbsp; Directions
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-name">
+        Tiwari Dhaba & Restaurant
+    </div>
+
+    <div class="footer-hindi">
+        ?????? ???? ??? ??????????
+    </div>
+
+    <div class="copyright">
+        © 2026 Tiwari Dhaba & Restaurant
+        · Mangari, Uttar Pradesh
+    </div>
+
+</footer>
+
+</div>
+
+
+<!-- ======================================================
+     JAVASCRIPT — PULL ROPE
+====================================================== -->
+
+<script>
+
+const intro = document.getElementById("intro");
+const website = document.getElementById("website");
+const ropeArea = document.getElementById("ropeArea");
+
+let startY = 0;
+let pulling = false;
+let opened = false;
+
+/* -----------------------------------------
+   OPEN WEBSITE
+----------------------------------------- */
+
+function openWebsite(){
+
+    if(opened) return;
+
+    opened = true;
+
+    ropeArea.classList.add("pulling");
+
+    setTimeout(() => {
+
+        intro.classList.add("hide");
+        website.classList.add("visible");
+
+        document.body.classList.remove("locked");
+
+        setTimeout(() => {
+            document.getElementById("home").scrollIntoView({
+                behavior:"smooth"
+            });
+        },500);
+
+    },650);
+}
+
+
+/* -----------------------------------------
+   MOUSE
+----------------------------------------- */
+
+ropeArea.addEventListener("mousedown",(e)=>{
+
+    if(opened) return;
+
+    pulling = true;
+    startY = e.clientY;
+
+});
+
+document.addEventListener("mousemove",(e)=>{
+
+    if(!pulling || opened) return;
+
+    const distance = e.clientY - startY;
+
+    if(distance > 70){
+        openWebsite();
+    }
+
+});
+
+document.addEventListener("mouseup",()=>{
+
+    pulling = false;
+
+});
+
+
+/* -----------------------------------------
+   TOUCH / MOBILE
+----------------------------------------- */
+
+ropeArea.addEventListener("touchstart",(e)=>{
+
+    if(opened) return;
+
+    pulling = true;
+    startY = e.touches[0].clientY;
+
+},{passive:true});
+
+
+ropeArea.addEventListener("touchmove",(e)=>{
+
+    if(!pulling || opened) return;
+
+    const distance =
+        e.touches[0].clientY - startY;
+
+    if(distance > 70){
+        openWebsite();
+    }
+
+},{passive:true});
+
+
+ropeArea.addEventListener("touchend",()=>{
+
+    pulling = false;
+
+});
+
+
+/* -----------------------------------------
+   CLICK FALLBACK
+   If someone simply clicks the rope,
+   it also opens.
+----------------------------------------- */
+
+ropeArea.addEventListener("click",()=>{
+
+    if(!opened){
+        openWebsite();
+    }
+
+});
+
+</script>
+
+</body> 
+</html>
+```
